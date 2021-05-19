@@ -1,0 +1,374 @@
+                                                   												
+													 GIT and GITHUB
+what you need -> gitbash or cmd.
+
+Ques: what is GIT and GITHUB ?
+Ans:
+GIT : GIT is a distributed command line for version control.that let us manage projects. it is installed on our local system
+
+GITHUB: GITHUB is a cloud based repository to host our application or code.
+
+
+shell commands
+1.> mkdir -> to create new repository 
+mkdir my-project - > it will create a new folder in your directory.
+
+
+to create a file 
+2.> touch filename -> eg touch file1.txt
+
+
+3.> to open folder from the terminal 
+
+start .
+
+to open visual studio code use command : code .
+
+
+to intitialize git 
+4.> git init
+
+it will create .git folder inside the folder.
+git init command creates a git folder inside the folder. 
+
+
+5.> to get currnet working path
+pwd 
+
+6.> to get list view of files inside folder
+ls -l 
+
+7.> echo command
+echo command is used to write into the file or append to the content of a file.
+ 
+redirect to a folder
+ 
+ ->  echo "text to print" > file_name
+ 
+ echo "hey this is to text git" > notes.txt
+ 
+ this will create a file notes.txt into the folder and write "hey this is to text git".
+ 
+
+8.> to remove or delete file
+
+rm filename
+
+rm fil1.txt
+
+to delete multile files : 
+rm file1.txt file2.txt file...name
+
+
+			to delete folder 
+
+rm -rf folder_name
+
+
+9.> to create sha of any string 
+
+echo "hello string" | shasum
+
+10.> to get content from file object
+
+first generate the hash value of object
+echo "hello rohit" | git hash-object -w 
+this will generate the hash value of string "hello rohit" and will write into .git/objects folder
+
+git cat-file -p <hash file>  -- contents of file
+git cat-file -s <hash file>  -- size of the bject
+git cat-file -t <hash file> --type of object
+
+11.> to read contents of file normal
+
+cat filename
+ 
+ to edit a file 
+ 
+ vi <file-name>
+like cat file1.txt
+
+12.>Tree in GIT
+git mktree
+
+13.> to add files into staging area
+
+git add <filename>
+
+or git add .      // it will add all the untracked or modified files to staging area
+
+14.> to check files inside staging area
+git status 
+
+
+15.> to unstage a file 
+
+git rm --cached <filename> 
+--cached is used to keep the file in local system 
+
+we can use -f to remove the file from local repository
+
+after git rm command check with git status
+
+16.> git branches
+
+to create a branch 
+git branch <branch-name>
+
+to checkout a specific branch 
+git checkout <branch-name>
+
+git checkout -b <branch-name>  // this command let you create and checkout the branch at the same time.
+
+
+to rename a branch  (use -m to rename)
+git branch -m <old-name> <new-name>
+
+
+to delete a branch 
+git branch -d <branch-name>
+
+
+17.> difference between cloning and downloading git repo and how to clone?
+
+cloning : git clone <repo-url>
+git clone create a clone or copy of the repository . cloning creates a remote connection with the target branch (target branch can be on your system or remote) called origin.
+
+18.> git diff 
+
+19.> git merge 
+git merge lets you merge your feature branch into master branch or any branch.
+
+to merge feature branch into master branch 
+use : git merge <branch name>
+
+git checkout master
+git merge <branch name  to be merged>
+	
+20.> 3 way merge git
+
+
+
+21.> git pull ,push , fetch.
+git pull : git pull merges the remote branch into our local branch. when we do git pull -> then git fetches all the changes from remote repository it executes git fetch in the background.
+FETCH_HEAD	- this file contains sha-1 of the commits and after that it merges those sha-1 into current branch.
+
+git add . - >add all the files to staging area new and modified 
+
+git add -a -> stages all files
+
+git add -u -> stages modified and deleted but not new files
+
+----------
+git fetch : git fetch command download the remote content ut doesnot update your local repo.
+eg : in local repo you have 2 files : file1 and file 2
+
+whereas in remote rpo you have 3 files : file1, file2. file3 
+
+so on git fetch you will download all the updates from remote repo file 3as well but you file3 wont be visible in your local repo.
+
+files from git fetch are downloaded into FETCH_HEAD you can check that in .git/FETCH_HEAD
+
+to merge those : git merge FETCH_HEAD
+--------------
+
+git prune command : consider you have a branch in remote repository with name temp and in your local repo.
+if you delete the branch in remote repo still branch will be refelcting in the local repo 
+we can check by : git branch -vv
+
+this is because in our local heads it has the pointer ref to temp 
+
+to delete this we have to : git remote update origin --prune
+
+it will be de ref now we have to delete branch in our local 
+git branch -D <branch name> use capital D
+
+
+Ques : what is origin and master in git?
+Ans: In Git, "origin" is a shorthand name for the remote repository that a project was originally cloned from. More precisely, it is used instead of that original repository's URL - and thereby makes referencing much easier.
+
+Ques: what does set upstream mean?
+Ans: Upstream branches are the branch tracked on the remote repository by your local remote branch (also called the remote tracking branch.
+
+in local repo if we have a branch dev and we know origin is the remote repo so we want our local repo to be in sync with remote so we need to sync it with upstream branch which is origin.
+
+origin/dev
+
+git push -u <remote if origin or master> <youy branch name>
+
+how to check : when we clone a repo then we get master default branch which is in sync with origin/master which means master is the local branch and origin/master is the upstream branch. 
+
+
+Ques how do you create a branch and delete a local branch in git?
+Ans: git branch -d <branch name> // this will delete branch locally 
+
+to delete branch on remote : git push origin --delete <branch name>
+
+
+Ques what is pull request and why do we need it?
+
+
+Ques : what is the difference between git clone and git fork?
+ANs: forking also clones the repository into the git hub repo 
+while cloning makes the copy into our local
+
+when you fork a repository you create a copy of original repository (upstream repository) but in case of fork the repository remains on your github account. 
+
+git clone : when you clone a repository the repository , the repo is copied onto your local machine with the help of git.
+
+https://www.toolsqa.com/git/difference-between-git-clone-and-git-fork/#:~:text=Forking%20is%20done%20on%20the,remains%20on%20your%20GitHub%20account.
+
+
+
+Ques: what is Rebasing?
+Ans: in git rebase is alternative to merge command. in rebasing integrates change from one branch to another branch.
+
+git merge :  merging takes the contents of a source branch and integrates them with a target branch.In this process, only the  target branch is changed. The source branch history remains the same.
+
+git Rebase : git rebase command is another way to integrate changes from one branch to another. but git rebase compresses all the changes into single patch or single commit and then merge that patch into target branch.
+
+for eg : 
+if you have a master branch with commits m1 m2 m3
+
+and i created a feature branch from m2 commit 
+and  in feautre branch created 2 commits : f1 f2 
+
+now we can merge those 2 commits f1 and f2 to master then we have 2 ways
+
+merge and rebase 
+
+rebasing : before rebasing the base of our feature branch is m2 commit.
+ rebasing is changing the base of your branch from one commit to another making it appear as if you'd created your branch from a different commit.
+
+to rebase 
+
+Merging of a feature branch into main branch is a 2 step process. 
+1. checkout feature branch and rebase feature branch on top of base branch. -> git rebase master 
+2. checkout main branch.
+3. merge feature branch into master. -> git merge feature
+
+
+Ques: what is git ignore?
+Ans: it tells  git which file and folder to ignore. files added in git ignore are not tracked by git.
+
+eg if we have file file.txt and we want to untrack this file we can add it in git ignore 
+
+git ignore file is named as -> .gitignore
+
+if we want to ignore all .txt file then we can have = *.txt in gitignore 
+for any folder to ignore -> path -> eg bin/src
+
+Ques: what is git shortlog command?
+Ans: git shortlog command gives the summary of the commits grouped by author name.
+ command : git shortlog 
+ 
+to get in srted order use -n , 
+
+Ques: how to get log of commits by author name?
+Ans: git log --author="<author name>"
+
+git log --merges to get all merge commits
+
+
+Ques: git reset command?
+
+Ans: git reset command : if we made a commit or commits and we dont want that commit or to get back previous state of commit we can do that by git reset. there are 3 options for git reset --hard , -soft , --mixed(default).
+
+eg : git reset <hash value of commit> then it the branch will be reseted to the provided commit(hash value).
+and the changes in those commit will be removed from staging or index area. 
+
+you can check by git status.
+
+
+git reset if of 3 types: 
+
+--soft : git reset --soft dicard the changes  keep the changes in the staging area.
+
+--hard : git reset --hard discard th changes or commit -> discard changes in staging area -> discard changes in working dir.
+
+--mixed : git reset --mixed reset to the head and remove the file from index/staging area.
+
+
+
+Ques: git amend?
+Ans: gitr amend is used to change the last commit message.
+git amend --commit -m "<new message>"
+
+
+Ques: how to reset last commit ?
+Ans: git reset HEAD
+
+
+how rename branch we can use git branch -m <name>
+
+to change master to main we can use : git branch -m main
+
+
+how to get git config list 
+Ans: git config --list 
+
+we can change username and email in git config using 
+
+git config --global user.name <new name> // global flag will set the values at global level
+git config --global user.email <email	>
+
+
+to write to existing file 
+
+echo "hey this is some more text" >> file1.txt
+
+
+Ques: git cherry picking?
+Ans:git cherry pick command lets you merge you specific commit into any branch.
+
+let you have a branch master, and a feature branch :
+
+you changed in feature branch and you want only specific last commit to merge into master branch then inspite of git merge we can use git cherry pick
+
+git cherry-pick <hash of commit>
+
+
+we can also use flag --no-commit to stop git to automatically merge
+git cherry-pick --no-commit <hash value of commit>
+
+Ques: what is stashing in git?
+Ans: After git stash git creates temproral commit and stores it in ref/stash.
+Stashing takes the dirty state of your working directory — that is, your modified tracked files and staged changes — and saves it on a stack of unfinished changes that you can reapply at any time (even on a different branch
+
+to stash : git stash 
+
+to bring back stash changes: git stash pop
+
+git stash list // to get the list of stashed file
+
+git stash apply stash@{num like 01 from stash list } // to apply stash changes
+
+to drop stash : git stash drop stash@{}
+
+
+
+git log command:
+
+To extract specific from git log 
+use command 
+git log --grep="<key or values to search with>"
+
+Pretty log command:
+
+to extract git log of only hashes:
+git log  --pretty=format:"%H"  -> extract all  git log of hashes.
+
+to get git log with commiter name and hash value 
+
+git log --pretty=format:"%cn %H"
+
+with commiting date : git log --pretty=format:"%cn %H %cd"
+
+
+Ques: git revert .
+
+
+Ques: how can we use git amend for file changes?
+
+
+Ques: what is git instaweb?
